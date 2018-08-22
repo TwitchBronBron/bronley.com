@@ -1,11 +1,319 @@
-<html>
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        [pointer] {
+            cursor: pointer;
+        }
+
+        [text-center] {
+            text-align: center;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .selected {
+            background-color: forestgreen;
+            color: white;
+        }
+
+        table {
+            font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        table th {
+            padding: 12px;
+        }
+
+        table td,
+        table th {
+            border: 1px solid #ddd;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #b4ffdc;
+        }
+
+        table th {
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+            cursor: pointer;
+            padding: 5px;
+            margin: 5px;
+            display: inline-block;
+        }
+
+        .source-link {
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            right: 5px;
+            top: 5px;
+        }
+
+        .source-link img {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        [pull-left] {
+            float: left;
+        }
+
+        [pull-right] {
+            float: right;
+        }
+
+        [inline-block] {
+            display: inline-block;
+        }
+
+        [clearfix] {
+            clear: both;
+        }
+    </style>
+</head>
 
 <body>
-    <a id="redirect-link">Click here if you are not automatically redirected.</a>
+    <a href="./" class="source-link" title="View in plain mode">
+        <img alt="" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgaGVpZ2h0PSIyMjQiCiAgIHdpZHRoPSI0NDgiCiAgIGlkPSJzdmc0IgogICB2ZXJzaW9uPSIxLjEiCiAgIHZpZXdCb3g9IjAgMCA0NDggMjI0Ij4KICA8bWV0YWRhdGEKICAgICBpZD0ibWV0YWRhdGExMCI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczgiIC8+CiAgPHBhdGgKICAgICBpZD0icGF0aDIiCiAgICAgZD0iTSA0Mi42LDExMiBDIDQyLjYsNzMuNyA3My43LDQyLjYgMTEyLDQyLjYgaCA4OCBWIDAgSCAxMTIgQyA1MC4yLDAgMCw1MC4yIDAsMTEyIDAsMTczLjggNTAuMiwyMjQgMTEyLDIyNCBoIDg4IFYgMTgxLjQgSCAxMTIgQyA3My43LDE4MS40IDQyLjYsMTUwLjMgNDIuNiwxMTIgWiBNIDEyOCwxMzQgSCAzMjAgViA5MCBIIDEyOCBaIE0gMzM2LDAgaCAtODggdiA0Mi42IGggODggYyAzOC4zLDAgNjkuNCwzMS4xIDY5LjQsNjkuNCAwLDM4LjMgLTMxLjEsNjkuNCAtNjkuNCw2OS40IEggMjQ4IFYgMjI0IGggODggQyAzOTcuOCwyMjQgNDQ4LDE3My44IDQ0OCwxMTIgNDQ4LDUwLjIgMzk3LjgsMCAzMzYsMCBaIiAvPgo8L3N2Zz4K"
+        />
+    </a>
+    <div class="container">
+        <app></app>
+    </div>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.0.4/fuse.min.js"></script>
     <script>
-        var url = "http://bronley.no-ip.biz:8080/worship";
-        document.getElementById('redirect-link').href = url;
-        window.location.href = url;
+        angular.module('app', []).component('app', {
+            template: '\
+                <div text-center>\
+                    <input pull-left placeholder="Filter by title" type="text" ng-change="vm.filterByTitle(vm.filterText)" ng-model="vm.filterText" ng-model-options="{debounce: 300}" \>\
+                    <button ng-click="vm.clearFilter()">Clear Filter</button>\
+                    <div inline-block pull-right>\
+                        <button ng-click="vm.filterByKey(key)" ng-class="{\'selected\': vm.filterKey === key}" ng-repeat="key in vm.allKeys" ng-if="vm.keys.indexOf(key) > -1">{{key}}</button>\
+                    </div>\
+                    <div clearfix></div>\
+                </div>\
+                <table>\
+                    <thead>\
+                        <tr>\
+                            <th pointer ng-click="vm.sort(\'name\')">Name <span ng-bind-html="vm.sortChar(\'name\')"></span></th>\
+                            <th>Keys</th>\
+                            <th pointer ng-click="vm.sort(\'dateModified\')">Date Modified <span ng-bind-html="vm.sortChar(\'dateModified\')"></span></th>\
+                        </tr>\
+                    </thead>\
+                    <tbody>\
+                        <tr id="{{group.name}}" ng-repeat="group in vm.filteredGroups track by group.name">\
+                            <td>{{ group.name }}</td>\
+                            <td><a href="{{group.songByKey[key].url}}" ng-click="$event.stopPropagation()" target="_blank" ng-repeat="key in group.keys">{{ key }}&nbsp;</a></td>\
+                            <td>{{ group.dateModified | date: "MMM dd yyyy"}}</td>\
+                        </tr>\
+                    </tbody >\
+                </table >\
+            ',
+            controllerAs: 'vm',
+            controller: function ($http, $sce) {
+                var vm = this;
+                vm.groups = [];
+                vm.filteredGroups = [];
+                vm.keys = [];
+                vm.sortColumn = 'name';
+                vm.sortAscending = true;
+                vm.filterKey = undefined;
+                vm.allKeys = ['G', 'Ab', 'A', 'Bb', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', '#'];
+                var excludedExtensions = ['db', 'html'];
+
+                vm.filterByKey = function (key) {
+                    vm.filterKey = key;
+                    var copy = vm.groups.slice();
+                    vm.filteredGroups = copy.filter(function (a) {
+                        return a.keys.indexOf(vm.filterKey) > -1;
+                    });
+                    vm.applySort(vm.filteredGroups);
+                };
+
+                vm.filterByTitle = function (text) {
+                    if (!text) {
+                        return vm.clearFilter();
+                    }
+                    vm.filterKey = undefined;
+                    vm.filteredGroups = vm.fuse.search(text);
+                    debugger;
+
+                    vm.applySort(vm.filteredGroups);
+                };
+
+                vm.clearFilter = function () {
+                    this.filterKey = undefined;
+                    this.filterText = undefined;
+                    this.filteredGroups = vm.groups.slice();
+                }
+
+                vm.sortChar = function (propName) {
+                    if (vm.sortColumn === propName) {
+                        return $sce.trustAsHtml(vm.sortAscending ? '&uarr;' : '&darr;');
+                    } else {
+                        return '';
+                    }
+                };
+
+                vm.sort = function (propName) {
+                    if (vm.sortColumn === propName) {
+                        vm.sortAscending = !vm.sortAscending;
+                    } else {
+                        vm.sortAscending = true;
+                    }
+                    vm.sortColumn = propName;
+                    vm.applySort(vm.filteredGroups);
+                    vm.applySort(vm.groups);
+                };
+
+                vm.applySort = function (data) {
+                    data.sort(function (a, b) {
+                        if (a[vm.sortColumn] instanceof Date) {
+                            var cmp = a[vm.sortColumn] > b[vm.sortColumn] ? 1 : a[vm.sortColumn] == b[vm.sortColumn] ? 0 : -1;
+                        } else {
+                            var cmp = a[vm.sortColumn].localeCompare(b[vm.sortColumn]);
+                        }
+                        return cmp * (vm.sortAscending ? 1 : -1);
+                    });
+                }
+
+                vm.$onInit = function () {
+                    var path = window.location.pathname;
+                    var page = path.split("/").pop();
+                    var indexerUrl = 'https://home.bronley.com:8443/worship/';
+                    $http.get(indexerUrl).then(function (response) {
+                        var text = response.data;
+
+                        var songs = [];
+                        var rows = text.split('\n')
+                        for (var i = 0; i < rows.length; i++) {
+                            var regex = /\s*<a\s*href=\s*"(.*)"\s*>(.*)<\/a>\s*([\w-]*\s*[\w-:]*)/g;
+                            var keyRegex = /\(([ABCDEFG#]{1,3})\)/gi;
+                            var row = rows[i];
+                            if (row.indexOf('<a') === 0) {
+                                var match = regex.exec(row);
+                                if (match) {
+
+                                    //use the url for the name since the name gets truncated
+                                    var url = indexerUrl + match[1];
+                                    var fileName = decodeURIComponent(match[1]);
+
+                                    var lastPeriodIndex = fileName.lastIndexOf('.');
+                                    var name = fileName.substring(0, lastPeriodIndex);
+                                    var ext = fileName.substring(lastPeriodIndex + 1);
+                                    var dateModified = new Date(match[3]);
+                                    var key = undefined;
+                                    var keyMatch = keyRegex.exec(name);
+                                    if (keyMatch) {
+                                        key = keyMatch[1];
+                                        var removeChordRegex = new RegExp("\\s*\\(" + keyMatch[0] + "\\)\\s*", "gi");
+                                        name = name.replace(removeChordRegex, "").trim();
+                                    } else {
+                                        key = '#';
+                                    }
+
+                                    //throw out folders and unwanted file types
+                                    if (name === '' || excludedExtensions.indexOf(ext.toLowerCase()) > -1) {
+                                        continue;
+                                    }
+                                    var record =
+                                    {
+                                        url: url,
+                                        name: name,
+                                        dateModified: dateModified,
+                                        extension: ext,
+                                        key: key
+                                    };
+                                    vm.keys.indexOf(record.key) === -1 ? vm.keys.push(record.key) : undefined;
+                                    songs.push(record);
+                                }
+                            }
+                        }
+
+                        //group every song
+                        var groups = [];
+                        var groupLookup = {};
+                        for (var i = 0; i < songs.length; i++) {
+                            var song = songs[i];
+                            var group;
+                            if (!groupLookup[song.name.toLowerCase()]) {
+                                group = {
+                                    name: song.name,
+                                    dateModified: song.dateModified,
+                                    keys: [],
+                                    songs: [],
+                                    songByKey: {}
+                                };
+                                groupLookup[song.name.toLowerCase()] = group;
+                                groups.push(group)
+                            } else {
+                                group = groupLookup[song.name.toLowerCase()];
+                            }
+                            group.songs.push(song);
+                            group.songByKey[song.key] = song;
+                            group.keys.push(song.key);
+                            if (group.dateModified < song.dateModified) {
+                                group.dateModified = song.dateModified;
+                            }
+                        }
+
+                        //sort all group keys
+                        for (var i = 0; i < groups.length; i++) {
+                            var group = groups[i];
+                            var sortedKeys = [];
+                            for (var k = 0; k < vm.allKeys.length; k++) {
+                                var key = vm.allKeys[k];
+                                if (group.keys.indexOf(key) > -1) {
+                                    sortedKeys.push(key);
+                                }
+                            }
+                            group.keys = sortedKeys;
+                        }
+                        vm.groups = groups;
+
+                        vm.applySort(vm.groups);
+                        vm.filteredGroups = vm.groups.slice();
+
+                        vm.fuse = new Fuse(groups, {
+                            threshold: 0.4,
+                            keys: ['name']
+                        })
+
+                        //load a file in an iframe to wake up the hard drive
+                        $http.get(vm.groups[0].songs[0].url);
+                    });
+                };
+            }
+        });
+
     </script>
 </body>
 
