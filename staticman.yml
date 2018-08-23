@@ -40,7 +40,7 @@ comments:
   name: "www.bronley.com"
 
   reCaptcha: 
-    enabled: true
+    enabled: false
     siteKey: "6Lcjt2sUAAAAAAnbinc0xaQlZpGM4tz6pVf3_vPc"
     secret: "rljoge8tHPKFMR4QyqQBbngaXqmS1j8fIBj7OzfGlk3HtHfSSXR35tsy2mS0VbkfJf1pFRmpcD2HcXhj9jAF4XteRy5ubev1j4AUBG1JuPLpDDfcpi1wmOHLy8/ts5ztbiWNjlCp4FDfxYa+p11z+nJW9lEfSivtCzn9s2r70Go="
 
