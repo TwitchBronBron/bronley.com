@@ -1,0 +1,26 @@
+<div text-center>
+    <input pull-left placeholder="Filter by title" type="text" ng-change="vm.filterByTitle(vm.filterText)" ng-model="vm.filterText"
+        ng-model-options="{debounce: 300}" \>
+    <button ng-click="vm.clearFilter()">Clear Filter</button>
+    <div inline-block pull-right>
+        <button ng-click="vm.filterByKey(key)" ng-class="{selected: vm.filterKey === key}" ng-repeat="key in vm.allKeys" ng-if="vm.keys.indexOf(key) > -1">{{key}}</button>
+    </div>
+    <div clearfix></div>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th pointer ng-click="vm.sort('name')">Name <span ng-bind-html="vm.sortChar('name')"></span></th>
+            <th>Keys</th>
+            <th pointer ng-click="vm.sort('dateModified')">Date Modified <span ng-bind-html="vm.sortChar('dateModified')"></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr id="{{group.name}}" ng-repeat="group in vm.filteredGroups track by group.name">
+            <td>{{ group.name }}</td>
+            <td><a href="{{group.songByKey[key].url}}" ng-click="$event.stopPropagation()" target="_blank" ng-repeat="key in group.keys">{{
+                    key }}&nbsp;</a></td>
+            <td>{{ group.dateModified | date: "MMM dd yyyy"}}</td>
+        </tr>
+    </tbody>
+</table>
