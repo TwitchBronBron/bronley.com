@@ -23,6 +23,10 @@ body {
     color: $darkGray;
 }
 
+.hide{
+    display: none !important;
+}
+
 .container {
     margin: 0 auto;
     max-width: 740px;
@@ -315,7 +319,8 @@ footer {
 }
 
 .comment {
-    margin-top:50px;
+    margin-top:60px;
+    padding: 5px;
 
     >.comment-sidebar {
         width: 70px;
@@ -336,12 +341,17 @@ footer {
             font-size: .7em;
             padding: 0;
             margin: 0;
+            text-decoration: none;
+            display:inline-block;
         }
     }
+    &:target {
+        background-color: #c2bcb2 !important;
+    }
+}
 
-    >.comment-content-bar{
-        >.child-comments-container{
-            border-left:1px solid lightgrey;
-        }
-    }
+i.reply {
+    font-style: normal;
+    font-size: 1.5em;
+    vertical-align:middle;
 }

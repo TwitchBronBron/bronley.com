@@ -1,16 +1,19 @@
-<div class="comment">
+<div class="comment" id="{{include.comment._id}}">
     <div class="comment-sidebar">
-            <img class="comment-avatar" src="https://www.gravatar.com/avatar/{{ include.comment.email }}?d=mm&s=50" 
-            srcset="https://www.gravatar.com/avatar/{{ include.comment.email }}?d=mm&s=100 2x"
-            alt="{{ include.comment.name }}" height="50" width="50" />
+        <img class="comment-avatar" src="https://www.gravatar.com/avatar/{{ include.comment.email }}?d=mm&s=50" 
+        srcset="https://www.gravatar.com/avatar/{{ include.comment.email }}?d=mm&s=100 2x"
+        alt="{{ include.comment.name }}" height="50" width="50" />
     </div>
     <div class="comment-content-bar">
         <div class="comment-name">{{include.comment.name}}</div>
-
-        <div class="comment-date" title='{{include.comment.date | date: "%a, %b %d, %y" }}'>
+        <a href="#{{include.comment._id}}" class="comment-date" title='Link directly to this comment'>
             {{include.comment.date | date: "%B %e, %Y at %l:%m%p" }}
+        </a>
+        <p class="comment-message">{{include.comment.message | markdownify}}</p>
+        <div class="comment-reply-container">
+            <a class="comment-reply-anchor hide" onclick="showReplyForm(this)"><i class="reply">&#x21b6;</i> Reply to {{include.comment.name}}</a>
+            {% include add-comment-form.html comment=include.comment %}
         </div>
-        <p class="comment-message">{{include.comment.message}}</p>
         <div class="child-comments-container">
             {% for comment in include.comments %}
                 {% assign c = comment[1] %}
@@ -19,5 +22,6 @@
                 {% endif %}
             {% endfor %}
         </div>
+
     </div>
 </div>

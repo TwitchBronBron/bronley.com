@@ -1,5 +1,5 @@
 _id: 675b3220-a6c8-11e8-84c0-8991013dd0ff
 name: Bronley Allen Plumb
 email: 79b1c7e0c574f2a62059579cd78a1586
-message: Here's the message
+message: "```var something = true;\n something = null;```\n\n***Here's the message***"
 date: 1535024029
