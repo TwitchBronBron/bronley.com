@@ -34,10 +34,18 @@ comments:
   # Whether entries need to be appproved before they are published to the main
   # branch. If set to `true`, a pull request will be created for your approval.
   # Otherwise, entries will be published to the main branch automatically.
-  moderation: true
+  moderation: false
 
   # Name of the site. Used in notification emails.
-  name: "bronley.com"
+  name: "www.bronley.com"
+
+  reCaptcha: 
+    enabled: true
+    siteKey: "6Lcjt2sUAAAAAAnbinc0xaQlZpGM4tz6pVf3_vPc"
+    secret: "rljoge8tHPKFMR4QyqQBbngaXqmS1j8fIBj7OzfGlk3HtHfSSXR35tsy2mS0VbkfJf1pFRmpcD2HcXhj9jAF4XteRy5ubev1j4AUBG1JuPLpDDfcpi1wmOHLy8/ts5ztbiWNjlCp4FDfxYa+p11z+nJW9lEfSivtCzn9s2r70Go="
+
+  email:
+    from: "noreply@bronley.com"
 
   # Notification settings. When enabled, users can choose to receive notifications
   # via email when someone adds a reply or a new comment. This requires an account
