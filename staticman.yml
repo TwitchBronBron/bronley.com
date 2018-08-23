@@ -12,10 +12,10 @@ comments:
   branch: "master"
 
   # Text to use as the commit message or pull request title. Accepts placeholders.
-  commitMessage: "Add Staticman data"
+  commitMessage: "Add comment for {options.slug}"
 
   # Destination path (filename) for the data files. Accepts placeholders.
-  filename: "comment-{@timestamp}"
+  filename: "{@timestamp}"
 
   # The format of the generated data files. Accepted values are "json", "yaml"
   # or "frontmatter"
@@ -37,7 +37,7 @@ comments:
   moderation: false
 
   # Name of the site. Used in notification emails.
-  name: "www.bronley.com"
+  name: "Bronley.com"
 
   reCaptcha: 
     enabled: false
