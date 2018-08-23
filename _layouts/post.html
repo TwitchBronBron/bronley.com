@@ -3,16 +3,24 @@ layout: default
 ---
 
 <article class="post">
-  <h1>{{ page.title }}</h1>
+    <h1>{{ page.title }}</h1>
 
-  <div class="entry">
-    {{ content }}
-  </div>
+    <div class="entry">
+        {{ content }}
+    </div>
 
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
-  </div>
+    <div class="date">
+        Written on {{ page.date | date: "%B %e, %Y" }}
+    </div>
+    <!--include the comment form-->
+    {% include add-comment-form.html %} 
 
-  {% include disqus.html %}
-  {% include comments.html %}
+    <!--include the list of all comments. -->
+    {% assign comments = site.data.comments[page.slug] | sort %}
+    {% for comment in comments %}
+        {% assign c = comment[1] %}
+        {% if c.parentId == nil %}
+            {% include comment.html comment=c comments=comments %}
+        {% endif %}
+    {% endfor %}
 </article>

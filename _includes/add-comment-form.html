@@ -1,13 +1,18 @@
+<h1>Leave a comment</h1>
 <form method="POST" action="https://api.staticman.net/v2/entry/TwitchBronBron/bronley.com/master/comments">
     <input name="options[redirect]" type="hidden" value="https://www.bronley.com/submitted">
+    <!--hidden fields-->
     <!-- e.g. "2016-01-02-this-is-a-post" -->
     <input name="options[slug]" type="hidden" value="{{ page.slug }}">
-    <label><input name="fields[name]" type="text">Name</label>
-    <label><input name="fields[email]" type="email">E-mail</label>
-    <label><textarea name="fields[message]"></textarea>Message</label>
+
+    <input name="fields[name]" type="text" placeholder="Name" class="form-control"  />
+    <input name="fields[email]" type="email" placeholder="Email address (used for Gravatar image)" class="form-control" >
+    <textarea rows="5" name="fields[message]" placeholder="Comment (markdown is supported)" class="form-control"></textarea>
+
+
     <!-- <input type="hidden" name="options[reCaptcha][siteKey]" value="YOUR-SITE-KEY">
     <input type="hidden" name="options[reCaptcha][secret]" value="YOUR-ENCRYPTED-SECRET">
     <div class="g-recaptcha" data-sitekey="YOUR-SITE-KEY"></div>
     <script src='https://www.google.com/recaptcha/api.js'></script> -->
-    <button type="submit">Go!</button>
+    <button class="submit-button" type="submit">Add Comment</button>
 </form>
