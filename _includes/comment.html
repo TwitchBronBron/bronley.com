@@ -11,7 +11,7 @@
         </a>
         <p class="comment-message">{{include.comment.message | markdownify}}</p>
         <div class="comment-reply-container">
-            <a class="comment-reply-anchor hide" onclick="showReplyForm(this)"><i class="reply">&#x21b6;</i> Reply to {{include.comment.name}}</a>
+            <a class="comment-reply-anchor hide" onclick="showReplyForm(this)"><i class="reply">&#x21b6;</i>&nbsp;Reply</a>
             {% include add-comment-form.html comment=include.comment %}
         </div>
         <div class="child-comments-container">

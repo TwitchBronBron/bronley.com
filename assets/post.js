@@ -103,3 +103,66 @@ function resetVisibility() {
         element.classList.remove('hide');
     }
 }
+var converter;
+function showMarkdownPreview(tab) {
+    loadScripts(['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js', '/assets/showdown.min.js'], function () {
+        tab.classList.add('active');
+        tab.previousElementSibling.classList.remove('active');
+        var textarea = tab.parentElement.parentElement.querySelector('.comment-message-textarea');
+        var previewDiv = tab.parentElement.parentElement.querySelector('.comment-message-preview');
+
+        //hide the textarea
+        textarea.classList.add('hide');
+        //show the preview
+        previewDiv.classList.remove('hide');
+
+        //create the markdown converter if it doesn't already exist
+        converter = converter ? converter : new showdown.Converter();
+        previewDiv.innerHTML = converter.makeHtml(textarea.value);
+
+        var preTags = previewDiv.getElementsByTagName('pre');
+        for (var i in preTags) {
+            preTags[i].classList.add('highlight');
+        }
+    });
+}
+
+function hideMarkdownPreview(tab) {
+    tab.classList.add('active');
+    tab.nextElementSibling.classList.remove('active');
+    var textarea = tab.parentElement.parentElement.querySelector('.comment-message-textarea');
+    var previewDiv = tab.parentElement.parentElement.querySelector('.comment-message-preview');
+
+    //hide the textarea
+    textarea.classList.remove('hide');
+    //show the preview
+    previewDiv.classList.add('hide');
+}
+
+function loadScript(scriptUrl, callback) {
+    //if the script is already loaded, call the callback right away
+    if (document.getElementById(scriptUrl)) {
+        return callback();
+
+    }
+
+    var script = document.createElement('script');
+    script.id = scriptUrl;
+    script.src = scriptUrl;
+    script.onload = function () {
+        callback();
+    }
+    document.body.appendChild(script);
+}
+
+function loadScripts(scriptUrls, callback) {
+    var callbackCount = 0;
+    for (var i = 0; i < scriptUrls.length; i++) {
+        loadScript(scriptUrls[i], function () {
+            callbackCount++;
+            if (callbackCount === scriptUrls.length) {
+                callback();
+            }
+        });
+    }
+}

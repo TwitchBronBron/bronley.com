@@ -5,25 +5,30 @@ layout: default
 <article class="post">
     <h1 class="mt-0 mb-0">{{ page.title }}</h1>
     <div class="date">
-            Written on {{ page.date | date: "%B %e, %Y" }}
-        </div>
+        Written on {{ page.date | date: "%B %e, %Y" }}
+    </div>
     <div class="entry">
         {{ content }}
     </div>
-
+    <div spacer></div>  
+    <div class="edit-statement i">
+       Notice an issue? <a href="{{site.github_repository_url}}/blob/master/{{page.path}}">Suggest an edit</a> or leave a comment below.
+    </div>
+    <div spacer></div>  
  
-    <h3>{% if site.data.comments[page.slug].size > 1 %}{{ site.data.comments[page.slug] | size | append: ' ' }}{% endif %}Comments</h3>
+    <h3 id="comments">{% if site.data.comments[page.slug].size > 1 %}{{ site.data.comments[page.slug] | size | append: ' ' }}{% endif %}Comments</h3>
     
-    <!--include the list of all comments. -->
-    {% assign comments = site.data.comments[page.slug] | sort %}
-    {% for c in comments %}
-        {% assign comment = c[1] %}
-        {% if comment.parentId == '' %}
-            {% include comment.html comment=comment comments=comments %}
-        {% endif %}
-    {% endfor %}
+    {% if site.data.comments and site.data.comments[page.slug] %}
+        <!--include the list of all comments. -->
+        {% assign comments = site.data.comments[page.slug] | sort %}
+        {% for c in comments %}
+            {% assign comment = c[1] %}
+            {% if comment.parentId == '' %}
+                {% include comment.html comment=comment comments=comments %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 
-    <i spacer></i>
     <!--include the comment form-->
     {% include add-comment-form.html %} 
 </article>

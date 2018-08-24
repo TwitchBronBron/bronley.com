@@ -4,7 +4,16 @@
 
     <input name="fields[name]" type="text" placeholder="Name" class="form-control name-input" />
     <input name="fields[email]" type="email" placeholder="Email address (used for Gravatar image)" class="form-control email-address-input">
-    <textarea rows="5" name="fields[message]" placeholder="Comment (markdown is supported)" class="form-control"></textarea>
+    <div>
+        <div class="tabs">
+            <div class="tab active write" onclick="hideMarkdownPreview(this)">Write</div>
+            <div class="tab preview" onclick="showMarkdownPreview(this)">Preview</div>
+        </div>
+        <div class="message-area">
+            <textarea rows="7" name="fields[message]" placeholder="Comment (markdown is supported)" class="form-control comment-message-textarea"></textarea>
+            <div class="comment-message-preview hide"></div>
+        </div>
+    </div>
 
     <!--hidden fields-->
     <input name="options[redirect]" type="hidden" value="https://www.bronley.com/submitted">

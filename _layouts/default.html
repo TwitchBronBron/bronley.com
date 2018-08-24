@@ -1,5 +1,9 @@
+---
+layout: compress
+---
+
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
   <head>
     <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
 
@@ -8,18 +12,19 @@
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
 
-    <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/style.css"> 
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
 
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
   </head>
 
-  <body>
+  <body> 
     <div class="wrapper-masthead">
       <div class="container">
         <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+          <a href="{{ site.baseurl }}/" class="site-avatar" aria-label="Go to home page"><img src="{{ site.avatar }}" alt="Bronley with his son on his shoulders at the beach"/></a>
 
           <div class="site-info">
             <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
