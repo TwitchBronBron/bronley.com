@@ -12,15 +12,18 @@ layout: default
     <div class="date">
         Written on {{ page.date | date: "%B %e, %Y" }}
     </div>
-    <!--include the comment form-->
-    {% include add-comment-form.html %} 
-
+    <h3>{% if site.data.comments[page.slug].size > 1 %}{{ site.data.comments[page.slug] | size | append: ' ' }}{% endif %}Comments</h3>
+    
     <!--include the list of all comments. -->
     {% assign comments = site.data.comments[page.slug] | sort %}
-    {% for comment in comments %}
-        {% assign c = comment[1] %}
-        {% if c.parentId == nil %}
-            {% include comment.html comment=c comments=comments %}
+    {% for c in comments %}
+        {% assign comment = c[1] %}
+        {% if comment.parentId == '' %}
+            {% include comment.html comment=comment comments=comments %}
         {% endif %}
     {% endfor %}
+
+    <i spacer></i>
+    <!--include the comment form-->
+    {% include add-comment-form.html %} 
 </article>

@@ -5,6 +5,7 @@
 //
 @import "reset";
 @import "variables";
+@import "buttons";
 // Syntax highlighting @import is at the bottom of this file
 /**************/
 
@@ -23,7 +24,11 @@ body {
     color: $darkGray;
 }
 
-.hide{
+.mt-0 {
+    margin-top: 0px;
+}
+
+.hide {
     display: none !important;
 }
 
@@ -303,39 +308,28 @@ footer {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, .06);
 }
 
-.submit-button {
-    background-color: #00638a;
-    border-radius: .25em;
-    border: 0;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Menlo, Consolas, Monaco, Courier New, Courier, monospace;
-    font-weight: 700;
-    line-height: 1.5;
-    padding: .5em 1em;
-    text-align: center;
-    text-decoration: none;
-}
-
 .comment {
     margin-top:60px;
     padding: 5px;
 
-    >.comment-sidebar {
+    .comment-sidebar {
         width: 70px;
         display: inline-block;
         vertical-align:top;
     }
-    >.comment-content-bar {
+    $animationDuration: .38s;
+    .comment-content-bar {
         display: inline-block;
         width: calc(100% - 75px);
-        >.comment-name {
+        transition: all $animationDuration ease-in-out;
+
+        .comment-name {
             font-weight: bold;
             display: block;
             font-size: 1.2em;
+            transition: all $animationDuration ease-in-out;
         }
-        >.comment-date {
+        .comment-date {
             font-style: inherit;
             color: inherit;
             font-size: .7em;
@@ -343,10 +337,26 @@ footer {
             margin: 0;
             text-decoration: none;
             display:inline-block;
+            transition: all $animationDuration ease-in-out;
         }
     }
     &:target {
-        background-color: #c2bcb2 !important;
+        background-color: #ececec !important;
+    }
+}
+
+[spacer]{
+    margin: 40px;
+    display: block;
+}
+
+body.nested-reply-active{
+    .comment-content-bar{
+        width: 100%;
+        margin-left: -75px;
+    }
+    .comment-name, .comment-date{
+        margin-left: 75px !important;;
     }
 }
 

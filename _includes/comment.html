@@ -15,10 +15,11 @@
             {% include add-comment-form.html comment=include.comment %}
         </div>
         <div class="child-comments-container">
-            {% for comment in include.comments %}
-                {% assign c = comment[1] %}
-                {% if c.parentId == include.comment._id %}
-                    {% include comment.html comment=c comments=comments %}
+            <!--loop through every comment, add subcomments only for this comment-->
+            {% for c in include.comments %}
+                {% assign loopComment = c[1] %}
+                {% if loopComment.parentId != '' and loopComment.parentId == include.comment._id %}
+                    {% include comment.html comment=loopComment comments=comments %}
                 {% endif %}
             {% endfor %}
         </div>
