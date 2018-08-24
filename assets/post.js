@@ -1,3 +1,49 @@
+//document.ready
+if (document.readyState !== 'loading') {
+    init();
+} else {
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('document was not ready, place code here');
+        init();
+    });
+}
+
+function saveUserInfo(form) {
+    var name = form.getElementsByClassName('name-input')[0].value;
+    var emailAddress = form.getElementsByClassName('email-address-input')[0].value;
+    document.cookie = "name=" + name + "; expires=Thu, 18 Dec 2030 12:00:00 UTC; path=/";
+    document.cookie = "emailAddress=" + emailAddress + "; expires=Thu, 18 Dec 2030 12:00:00 UTC; path=/";
+}
+
+function loadUserInfo(form) {
+    var cookies = document.cookie;
+    var name = getCookie('name');
+    if (name) {
+        form.getElementsByClassName('name-input')[0].value = name;
+    }
+    var emailAddress = getCookie('emailAddress');
+    if (emailAddress) {
+        form.getElementsByClassName('email-address-input')[0].value = emailAddress;
+    }
+
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
 function showReplyForm(element) {
     //hide all nested reply forms
     resetVisibility();
@@ -10,6 +56,7 @@ function showReplyForm(element) {
 
     //show the form
     var form = element.nextElementSibling;
+    loadUserInfo(form);
     form.classList.remove('hide');
     form.getElementsByClassName('name-input')[0].focus();
 }
@@ -29,14 +76,6 @@ function cancelReply(element) {
     resetVisibility();
 }
 
-if (document.readyState !== 'loading') {
-    init();
-} else {
-    document.addEventListener('DOMContentLoaded', function () {
-        console.log('document was not ready, place code here');
-        init();
-    });
-}
 
 //progressive enhancement
 function init() {
@@ -50,6 +89,7 @@ function resetVisibility() {
         var element = elements[i];
         //skip the root comment form
         if (element.classList.contains('root-comment-form')) {
+            loadUserInfo(element);
             continue;
         }
         element.classList.add('hide');

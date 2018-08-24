@@ -1,9 +1,9 @@
-<form class="add-comment-form {% if include.comment == nil %}root-comment-form{% endif %}" method="POST" action="https://api.staticman.net/v2/entry/TwitchBronBron/bronley.com/master/comments">
+<form class="add-comment-form {% if include.comment == nil %}root-comment-form{% endif %}" onsubmit="saveUserInfo(this)" method="POST" action="https://api.staticman.net/v2/entry/TwitchBronBron/bronley.com/master/comments">
     <h1 class="mt-0">{% if include.comment %}Reply to {{include.comment.name}}{% else %}Leave a comment{% endif %}</h1>
 
 
     <input name="fields[name]" type="text" placeholder="Name" class="form-control name-input" />
-    <input name="fields[email]" type="email" placeholder="Email address (used for Gravatar image)" class="form-control">
+    <input name="fields[email]" type="email" placeholder="Email address (used for Gravatar image)" class="form-control email-address-input">
     <textarea rows="5" name="fields[message]" placeholder="Comment (markdown is supported)" class="form-control"></textarea>
 
     <!--hidden fields-->
