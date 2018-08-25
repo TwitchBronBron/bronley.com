@@ -345,12 +345,11 @@ footer {
 
 body.nested-reply-active {
     .comment-content-bar {
-        width: 100%;
-        margin-left: -75px;
+        margin-left: -55px;
     }
     .comment-name,
     .comment-date {
-        margin-left: 75px !important;
+        margin-left: 55px !important;
         ;
     }
 }
