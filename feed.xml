@@ -10,19 +10,21 @@
     <id>{{site.url}}/</id>
     <title type="html">{{site.name}}</title>
     <subtitle>{{site.description}}</subtitle>
-    {% assign posts = site.posts | sort | reverse %}
-    {% for post in posts %}
+    {%- assign posts = site.posts | sort | reverse -%}
+    {%- for post in posts -%}
+        {%- unless post.path contains '-draft.md' -%}
     <entry>
         <title type="html">{{post.title}}</title>
         <link href="{{site.url}}{{post.url}}" rel="alternate" type="text/html" title="{{post.title}}" />
         <published>{{post.date | date_to_xmlschema}}</published>
         <updated>{{post.date | date_to_xmlschema}}</updated>
         <id>{{site.url}}{{post.url}}</id>
-        <content type="html" xml:base="{{site.url}}{{post.url}}">{{post.content | markdownify | xml_escape}}</content>
+        <content type="html" xml:base="{{site.url}}{{post.url}}">{{post.content | xml_escape}}</content>
         <author>
-            <name></name>
+            <name>{{site.name}}</name>
         </author>
-        <summary type="html">{{post.excerpt}}</summary>
+        <summary type="html">{{post.excerpt | xml_escape}}</summary>
     </entry>
-    {% endfor %}
+        {%- endunless -%}
+    {%- endfor -%}
 </feed>
