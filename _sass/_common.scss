@@ -406,6 +406,9 @@ $tabBorderColor: #cacaca;
 }
 
 .comment.blur {
+    &>.header .avatar{
+        opacity: .4;
+    }
     &>.header,
     &>.content-row>.content,
     &>.content-row>.content>.comment-message,
