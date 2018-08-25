@@ -59,6 +59,9 @@ function showReplyForm(commentReplyAnchorElement) {
     loadUserInfo(form);
     form.classList.remove('hide');
 
+    //hide the root comment form
+    document.querySelector('.root-comment-form').classList.add('hide');
+
     //make all comments greyed out
     var commentElements = document.querySelectorAll('.comment');
     for (var i = 0; i < commentElements.length; i++) {
@@ -103,6 +106,7 @@ function resetVisibility() {
         var element = elements[i];
         //skip the root comment form
         if (element.classList.contains('root-comment-form')) {
+            element.classList.remove('hide');
             loadUserInfo(element);
             continue;
         }

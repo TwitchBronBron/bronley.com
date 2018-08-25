@@ -1,4 +1,4 @@
-<form class="add-comment-form {% if include.comment == nil %}root-comment-form{% endif %}" onsubmit="saveUserInfo(this)" method="POST" action="https://api.staticman.net/v2/entry/TwitchBronBron/bronley.com/master/comments">
+<form  {% if include.comment == nil %}id="root-comment-form"{% endif %} class="add-comment-form {% if include.comment == nil %}root-comment-form{% endif %}" onsubmit="saveUserInfo(this)" method="POST" action="https://api.staticman.net/v2/entry/TwitchBronBron/bronley.com/master/comments">
     <h2 class="mt-0">{% if include.comment %}Reply to {{include.comment.name}}{% else %}Leave a comment{% endif %}</h2>
 
 
