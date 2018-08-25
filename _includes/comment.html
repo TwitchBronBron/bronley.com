@@ -5,14 +5,16 @@
         alt="{{ include.comment.name }}" height="50" width="50" />
     </div>
     <div class="comment-content-bar">
-        <div class="comment-name">{{include.comment.name}}</div>
-        <a href="#{{include.comment._id}}" class="comment-date" title='Link directly to this comment'>
-            {{include.comment.date | date: "%B %e, %Y at %l:%m%p" }}
-        </a>
-        <p class="comment-message">{{include.comment.message | markdownify}}</p>
-        <div class="comment-reply-container">
-            <a class="comment-reply-anchor hide" onclick="showReplyForm(this)"><i class="reply">&#x21b6;</i>&nbsp;Reply</a>
-            {% include add-comment-form.html comment=include.comment %}
+        <div class="comment-content">
+            <div class="comment-name">{{include.comment.name}}</div>
+            <a href="#{{include.comment._id}}" class="comment-date" title='Link directly to this comment'>
+                {{include.comment.date | date: "%B %e, %Y at %l:%m%p" }}
+            </a>
+            <p class="comment-message">{{include.comment.message | markdownify}}</p>
+            <div class="comment-reply-container">
+                <a class="comment-reply-anchor hide" onclick="showReplyForm(this)"><i class="reply">&#x21b6;</i>&nbsp;Reply</a>
+                {% include add-comment-form.html comment=include.comment %}
+            </div>
         </div>
         <div class="child-comments-container">
             <!--loop through every comment, add subcomments only for this comment-->
@@ -23,6 +25,5 @@
                 {% endif %}
             {% endfor %}
         </div>
-
     </div>
 </div>

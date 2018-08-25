@@ -407,3 +407,12 @@ $tabBorderColor: #cacaca;
         margin-top: 0px;
     }
 }
+
+.blur {
+    >.comment-content-bar {
+        >.comment-content,
+        .comment-reply-anchor {
+            color: #e2e2e2 !important;
+        }
+    }
+}

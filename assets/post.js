@@ -44,7 +44,7 @@ function getCookie(cname) {
     return "";
 }
 
-function showReplyForm(element) {
+function showReplyForm(commentReplyAnchorElement) {
     //hide all nested reply forms
     resetVisibility();
 
@@ -52,21 +52,29 @@ function showReplyForm(element) {
     document.body.classList.add('nested-reply-active');
 
     //hide the "reply" anchor
-    element.classList.add('hide');
+    commentReplyAnchorElement.classList.add('hide');
 
     //show the form
-    var form = element.nextElementSibling;
+    var form = commentReplyAnchorElement.nextElementSibling;
     loadUserInfo(form);
     form.classList.remove('hide');
-    form.getElementsByClassName('name-input')[0].focus();
+
+    //make all comments greyed out
+    var commentElements = document.querySelectorAll('.comment');
+    for (var i = 0; i < commentElements.length; i++) {
+        //exclude the current comment
+        commentElements[i].classList.add('blur');
+    }
+    closestParent(commentReplyAnchorElement, '.comment').classList.remove('blur');
 }
 
-function cancelReply(element) {
+function cancelReply(formCancelButtonElement) {
+
     //show the reply anchor
-    element.parentElement.parentElement.getElementsByClassName('comment-reply-anchor')[0].classList.remove('hide');
+    closestParent(formCancelButtonElement, '.comment').querySelectorAll('.comment-reply-anchor')[0].classList.remove('hide');
 
     //hide the form
-    var form = element.parentElement;
+    var form = closestParent(formCancelButtonElement, 'form');
     form.classList.add('hide');
 
     //remove all comment nesting when adding a comment 
@@ -74,6 +82,12 @@ function cancelReply(element) {
 
     //hide all nested reply forms
     resetVisibility();
+
+    var commentElements = document.querySelectorAll('.comment');
+    for (var i = 0; i < commentElements.length; i++) {
+        //exclude the current comment
+        commentElements[i].classList.remove('blur');
+    }
 }
 
 
@@ -165,4 +179,30 @@ function loadScripts(scriptUrls, callback) {
             }
         });
     }
+}
+
+function closestParent(el, selector) {
+    var matchesFn;
+
+    // find vendor prefix
+    ['matches', 'webkitMatchesSelector', 'mozMatchesSelector', 'msMatchesSelector', 'oMatchesSelector'].some(function (fn) {
+        if (typeof document.body[fn] == 'function') {
+            matchesFn = fn;
+            return true;
+        }
+        return false;
+    })
+
+    var parent;
+
+    // traverse parents
+    while (el) {
+        parent = el.parentElement;
+        if (parent && parent[matchesFn](selector)) {
+            return parent;
+        }
+        el = parent;
+    }
+
+    return null;
 }
