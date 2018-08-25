@@ -329,7 +329,6 @@ footer {
                 font-weight: bold;
                 display: block;
                 font-size: 1.2em;
-                transition: all $animationDuration ease-in-out;
             }
             .comment-date {
                 font-style: inherit;
@@ -339,23 +338,23 @@ footer {
                 margin: 0;
                 text-decoration: none;
                 display: inline-block;
-                transition: all $animationDuration ease-in-out;
             }
         }
     }
     .content-row {
-        margin-left: 60px;
         display: block;
-        transition: all $animationDuration ease-in-out;
     }
     &:target {
         background-color: #ececec !important;
     }
+    &>.content-row>.child-comments-container {
+        transition: all $animationDuration ease-in-out;
+        margin-left: 60px;
+    }
 }
 
-body.nested-reply-active .comment .content-row {
-    margin-left: 0px;
-    width: 100%;
+body.nested-reply-active .child-comments-container {
+    margin-left: 0px !important;
 }
 
 [spacer] {
