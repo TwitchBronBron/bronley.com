@@ -4,12 +4,9 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I enjoy coding as much on my own time as I do for my career. I currently work as a software developer for a consulting firm near Harrisburg, PA. Get in touch if you want to find out more about what I do there.
 
-### More Information
-
-A place to include any other types of information that you'd like to include about yourself.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+[bronley+com@gmail.com](mailto:bronley+com@gmail.com)
