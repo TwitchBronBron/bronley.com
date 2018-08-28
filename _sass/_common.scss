@@ -9,13 +9,58 @@ html {
 body {
     background: $white;
     font: 18px/1.4 $helvetica;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif;
     color: $darkGray;
 }
 
 .i {
     font-style: italic;
 }
+
+[pull-left]{
+    float:left;
+}
+[pull-right]{
+    float:right;
+}
+
+[pull-right-xs]{
+    float:right
+}
+[pull-left-xs]{
+    float:left;
+}
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { 
+    [pull-right-sm]{
+        float:right;
+    }
+    [pull-left-sm]{
+        float:left;
+    }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { 
+    [pull-right-md] {
+        float: right;
+    }
+
+    [pull-left-md] {
+        float: left;
+    }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { 
+
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { 
+
+}
+
 
 .mt-0 {
     margin-top: 0px;
@@ -75,6 +120,8 @@ h4 {
 
 p {
     margin: 15px 0;
+    line-height: 1.58;
+    font-size: 21px;
 }
 
 a {
@@ -406,7 +453,7 @@ $tabBorderColor: #cacaca;
 }
 
 .comment.blur {
-    &>.header .avatar{
+    &>.header .avatar {
         opacity: .4;
     }
     &>.header,
