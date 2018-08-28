@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Raspberry PI Wifi
+title: Vacation Wifi (Part 1)
 hidden: false
 ---
 Every year we spend two weeks at a campground in Myrtle Beach. Our favorite site is located along the southern edge of the campground, which means we are farther from the campground's wifi access points. Unfortunately, our site is far enough away that the access points are almost unusable. 
