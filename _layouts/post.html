@@ -7,6 +7,13 @@ layout: default
     <div class="date">
         Written on {{ page.date | date: "%B %e, %Y" }}
     </div>
+    {% if page.hideAffiliateDisclaimer != true %}
+        <div class="affiliate-disclaimer">
+            Full Disclosure: This page might contain affiliate links. 
+            In the event of a sale, I will be awarded a small commission 
+            (at no extra cost to you).
+        </div>
+    {% endif %}
     <div class="entry">
         {{ content }}
     </div>
