@@ -51,11 +51,11 @@ The new device would still need to operate as a regular router, and would need s
 
 ## The Plan
 
-After I gathered my requirements, I spent some time some brainstorming, and I came up with a (probably over-engineered) solution:
+After I gathered my requirements, I spent some time brainstorming, and I came up with a (probably over-engineered) solution:
 
 > Use a Raspberry PI and two external USB wifi cards. Write some custom code to monitor for the best open wifi network, connect to that network, and provide internet through our own private wifi network.
 
-According to [the specs](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/), the Raspberry PI 3 B+ has a dual-band (2.4ghz and 5ghz) wifi card already built-in, which is perfect for broadcasting dual-band wifi at the camper. I could get two additional USB wifi cards, one for regularly evaluating the open access points and the other for maintaining a persistent connecting to that best network. Since I'm not worried about the device being pretty, the USB wifi cards could have large external antennas which would help increase its range. 
+According to [the specs](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/), the Raspberry PI 3 B+ has a dual-band (2.4ghz and 5ghz) wifi card already built-in, which is perfect for broadcasting dual-band wifi at the camper. I could get two additional USB wifi cards, one for regularly evaluating the open access points and the other for maintaining a persistent connection to that best network. Since I'm not worried about the device being pretty, the USB wifi cards could have large external antennas which would help increase its range. 
 
 
 The reason for having *two* external wifi cards is that it would allow for one wifi card to regularly evaluate all available access points without disrupting current internet activity. If a better access point is discovered, then the other external wifi card would connect to the better access point at its convenience. The system could store all of the past test results and use those results to make more educated decisions when picking which campground access point is the best choice.
