@@ -1,31 +1,3 @@
----
-layout: post
-title: Vacation Wifi Part 2
----
-I got the  [CanaKit Raspberry PI 3 B+](https://www.amazon.com/gp/product/B07BC7BMHY/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=bronley-20&linkId=b8875ab550f2eb7d5d90585afab9dd6d&language=en_US) package in the mail today. 
-
-I installed the latest version of Raspbian Stretch Lite from [here](https://www.raspberrypi.org/downloads/raspbian/) and followed their instructions to flash the image onto the SD card. 
-
-Then I added file to the root of the SD card called "SSH.txt" so that the SSH service was enabled by default. This service only starts once, and promptly deletes the ssh file, so I will need to remember to enable the SSH service to start on boot before I reboot the pi for the first time. 
-
-Then I inserted the SD card.
-
-I plugged the pi into my router using an ethernet cable. 
-
-I logged on to my router and looked for a new device on the network called "raspberrypi" and noted its ip address. In this case, the new pi is connected using ip address 192.168.1.120.
-
-Using PUTTY (or plain ssh if you have it available), connect to that ip address.
-
-
-All of these commands are run as root, that is omitted  for brevity's sake
-change the default password
-
-Thanks to [this blog post](https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md) for help with the wifi access point 
-
-Thanks to [this post](http://www.raspberryconnect.com/network/item/333-raspberry-pi-hotspot-access-point-dhcpcd-method) for figuring out what to do differently for raspbian stretch (many of the tutorials no longer work for raspbian stretch)
-Tweak some basic settings
-
-```bash
 #enable SSH service on startup. 0 means enabled
 raspi-config nonint do_ssh 0
 
@@ -50,9 +22,9 @@ apt-get remove --purge dnsmasq -yqq
 # and sometimes there are edge cases where one works after another, so why not just run them all every time
 apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y && apt full-upgrade -y
 
-#force the onboard wireless to be identified as wlan2 (so we can dependably use wlan0 and wlan1 for the usb dongles)
+#force the onboard wireless to be identified as wlan0 (so we can dependably use wlan0 and wlan1 for the usb dongles)
 cat > /etc/udev/rules.d/72-static-name.rules <<EOF
-ACTION=="add", SUBSYSTEM=="net", DRIVERS=="brcmfmac", NAME="wlan2"
+ACTION=="add", SUBSYSTEM=="net", DRIVERS=="brcmfmac", NAME="wlan0"
 EOF
 
 #reboot the pi to apply these changes
@@ -73,32 +45,29 @@ sudo systemctl unmask hostapd
 sudo systemctl enable hostapd
 
 cat >> /etc/dhcpcd.conf <<EOF
-interface wlan2
-static ip_address=192.168.4.1/24
-static routers=192.168.4.1
-static domain_name_servers=192.168.4.1
-#MAKE SURE THIS IS AT THE BOTTOM. Not having this line caused me so many headaches
-denyinterfaces wlan2
-nohook wpa_supplicant
+interface wlan0
+    static ip_address=192.168.4.1/24
+    nohook wpa_supplicant
+    denyinterfaces wlan0
 EOF
 
 cat > /etc/dnsmasq.conf <<EOF
-interface=wlan2
+interface=wlan0
   dhcp-range=192.168.4.100,192.168.4.200,255.255.255.0,24h
   domain=wlan
   address=/gw.wlan/192.168.4.1
 EOF
 
+#unblock the wifi
+sudo rfkill unblock wlan
+
 #configure the 2.4ghz wireless access point
 cat > /etc/hostapd/hostapd.conf <<EOF
-interface=wlan2
-driver=nl80211
-ssid=CamperWifi
-hw_mode=g
-channel=1
 country_code=US
-ieee80211d=1
-wmm_enabled=0
+interface=wlan0
+ssid=CamperPi
+hw_mode=g
+channel=7
 macaddr_acl=0
 auth_algs=1
 ignore_broadcast_ssid=0
@@ -107,7 +76,6 @@ wpa_passphrase=password
 wpa_key_mgmt=WPA-PSK
 wpa_pairwise=TKIP
 rsn_pairwise=CCMP
-bridge=br0
 EOF
 
 
@@ -145,12 +113,12 @@ EOF
 
 # sudo systemctl start network-online.target &> /dev/null
 
-# #configure a nat between wlan0 (internet) and wlan2 (camper-wifi access point)
+# #configure a nat between wlan0 (internet) and wlan0 (camper-wifi access point)
 # iptables -F
 # iptables -t nat -F
 # iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
-# iptables -A FORWARD -i wlan0 -o wlan2 -m state --state RELATED,ESTABLISHED -j ACCEPT
-# iptables -A FORWARD -i wlan2 -o wlan0 -j ACCEPT
+# iptables -A FORWARD -i wlan0 -o wlan0 -m state --state RELATED,ESTABLISHED -j ACCEPT
+# iptables -A FORWARD -i wlan0 -o wlan0 -j ACCEPT
 
 
 # #enable packet forwarding on every reboot
@@ -293,6 +261,6 @@ The built-in wifi card uses `brcmfmac`.
 
 readlink /sys/class/net/wlan0/device/driver
 readlink /sys/class/net/wlan1/device/driver
-readlink /sys/class/net/wlan2/device/driver
+readlink /sys/class/net/wlan0/device/driver
 readlink /sys/class/net/wlan3/device/driver
 readlink /sys/class/net/wlan4/device/driver
